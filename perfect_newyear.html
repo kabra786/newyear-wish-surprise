@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>New Year Surprise 🎉</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(120deg,#020024,#090979,#00d4ff);
+    color: white;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+.container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.6rem;
+    text-shadow: 0 0 15px cyan;
+}
+
+button {
+    margin: 15px;
+    padding: 14px 35px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.yes {
+    background: #00ffcc;
+}
+
+.no {
+    background: #ff4d4d;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+.shake {
+    animation: shake 0.5s;
+}
+
+/* Flowers rain */
+.flower {
+    position: fixed;
+    top: -10px;
+    font-size: 30px;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(110vh) rotate(360deg);
+    }
+}
+
+img {
+    width: 180px;
+    margin: 15px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(255,255,255,0.5);
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgm" loop>
+  <source src="https://files.freemusicarchive.org/storage-freemusicarchive-org/music/no_curator/Kai_Engel/Irsens_Tale/Kai_Engel_-_06_-_Moonlight_Reprise.mp3" type="audio/mpeg">
+</audio>
+
+<!-- STEP 1 -->
+<div class="container" id="step1">
+    <h1>😏 Question Time</h1>
+    <h2>Are you interested?</h2>
+    <button class="yes" onclick="yesClicked()">YES 😌</button>
+    <button class="no" onclick="noClicked()">NO 😑</button>
+</div>
+
+<!-- NO STEP -->
+<div class="container hidden" id="noStep">
+    <h1 class="shake">HOW DARE YOU 😤💔</h1>
+    <p>Itni himmat? NO dabaya? 😂</p>
+    <img src="https://cataas.com/cat/says/NOPE" alt="angry cat">
+</div>
+
+<!-- YES STEP -->
+<div class="container hidden" id="yesStep">
+    <h1>🎉 HAPPY NEW YEAR 2025 🎉</h1>
+
+    <p style="max-width:700px; font-size:1.1rem; line-height:1.8;">
+    🥳✨ Another year, another reason to smile because YOU exist!  
+    Thank you for being my **crazy, supportive, funny, annoying (but lovable)** best friend 💙😂  
+    <br><br>
+    May this year bring you **success 📈**, **happiness 😄**,  
+    **peace 🕊️**, and **lots of money 💸**  
+    <br><br>
+    Kabhi bhi low feel ho, yaad rakhna —  
+    tum bohot special ho, aur yeh duniya tumhari vibe ke baghair boring hoti 😌✨  
+    </p>
+
+    <button class="yes" onclick="showSurprise()">🎁 Open Your Surprise</button>
+</div>
+
+<!-- SURPRISE STEP -->
+<div class="container hidden" id="surpriseStep">
+    <h1>💐 Surprise for You 💐</h1>
+    <p>Flowers + cats = happiness overload 😺🌸</p>
+
+    <img src="https://cataas.com/cat/cute" alt="cute cat">
+    <img src="https://cataas.com/cat/funny" alt="funny cat">
+    <img src="https://cataas.com/cat/says/Happy%20New%20Year" alt="cat wish">
+    <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?auto=format&fit=crop&w=400&q=80" alt="flower bouquet">
+</div>
+
+<script>
+function noClicked() {
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("noStep").classList.remove("hidden");
+}
+
+function yesClicked() {
+    document.getElementById("step1").classList.add("hidden");
+    document.getElementById("yesStep").classList.remove("hidden");
+    document.getElementById("bgm").play();
+    createFlowers();
+}
+
+function showSurprise() {
+    document.getElementById("yesStep").classList.add("hidden");
+    document.getElementById("surpriseStep").classList.remove("hidden");
+}
+
+function createFlowers() {
+    const emojis = ["🌸","🌹","🌺","💐"];
+    for (let i = 0; i < 40; i++) {
+        let f = document.createElement("div");
+        f.className = "flower";
+        f.innerHTML = emojis[Math.floor(Math.random()*emojis.length)];
+        f.style.left = Math.random() * 100 + "vw";
+        f.style.animationDuration = (Math.random()*3+3) + "s";
+        document.body.appendChild(f);
+    }
+}
+</script>
+
+</body>
+</html>
